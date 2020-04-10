@@ -1,7 +1,7 @@
 # Covid 19 Analysis
 
 ## Data
-Source:https://github.com/CSSEGISandData/COVID-19
+Source:  https://github.com/CSSEGISandData/COVID-19
 
 Credit to Johns Hopkins CSSE for compiling and reporting COVID-19 data on a daily basis. 
 
