@@ -19,25 +19,12 @@ for (pkg in rpkgs){
   
 }
 
-# end_date <- if (now(tz = "UTC") < ymd_hms(paste0(today(), "23:59:00"), tz = "UTC")) {
-#   Sys.time() - 2
-#   
-# } else (
-#   Sys.time() - 1
-#   
-# )
-# 
-# as.POSIXlt(Sys.time(), tz = "UTC") < Sys.time()
-# 
-# ymd_hms("2020-04-11 22:59:00", tz = "UTC") < ymd_hms("2020-04-11 23:59:00", tz = "UTC")
-# now
-# 
-# format(Sys.time(), "%H:%M") <  
-
+# last available data file in repo
+end_date <- today(tz = "UTC") -1
 
 # create a vector of dates
 date_vector <-
-  seq.Date(as.Date("01-22-2020", format = "%m-%d-%Y"), today(tz = "UTC") -1, by = 1) %>% 
+  seq.Date(as.Date("01-22-2020", format = "%m-%d-%Y"), end_date, by = 1) %>% 
   format("%m-%d-%Y") %>% 
   as.character()
 
@@ -127,17 +114,15 @@ daily_cases_all_clean2 <-
   )
   
 
-daily_malaysia <- 
-  daily_cases_all_clean2 %>% 
-  filter(country_region == 'Malaysia')
+# dir create for new date
+dir.create(paste0("01_data/daily_cases/", format(end_date, "%Y-%m-%d")), recursive = T)
 
 # write csv
 write.csv(
   x = daily_cases_all_clean,
-  file = "01_data/covid19_daily_cases_cleaned.csv",
+  file = paste0("01_data/daily_cases/", format(end_date, "%Y-%m-%d"), "/covid19_daily_cases_cleaned.csv"),
   row.names = FALSE
 )
-
 
 
 

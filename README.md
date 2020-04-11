@@ -11,7 +11,18 @@ However, data files have inconsistent format from day to day. Codes in here aim 
 
 In R, use the below code to read the clean tidy data:
 
-`base::read.csv(RCurl::ULR()`
+`data_url <- 
+    paste0(
+      "https://github.com/ashten28/covid19_analysis/blob/master/01_data/",
+      format(lubridate::today(tz = "UTC")-1, "%Y-%m-%d"),
+      "covid19_daily_cases_cleaned.csv"
+      )
+      
+data <- read.csv(RCurl::URL(data_url))
+
+      `
+
+``
 
 The data consist of these main columns:
 
