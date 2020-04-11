@@ -7,7 +7,7 @@ Credit to Johns Hopkins CSSE for compiling and reporting COVID-19 data on a dail
 
 Each data file in here reports the figures as a cumulative amount. Hence, to obtain incremental figures, all the historical files must be compiled. 
 
-However, data files have inconsistent format from day to day. Codes in here aim to clean and compile the daily data into a tidy data. Please find the tidy data (here)[01_data/covid19_daily_cases_cleaned.csv]. 
+However, data files have inconsistent format from day to day. Codes in here aim to clean and compile the daily data into a tidy data. Please find the tidy data [here](01_data/covid19_daily_cases_cleaned.csv). 
 
 In R, use the below code to read the clean tidy data:
 
