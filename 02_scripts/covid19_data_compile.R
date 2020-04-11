@@ -104,13 +104,18 @@ daily_cases_all_clean <-
 # add incremental columns
 daily_cases_all_clean2 <-
   daily_cases_all_clean %>% 
-  arrange(province_state, country_region, cum_confirmed, cum_deaths, cum_recovered, report_date) %>% 
+  arrange(province_state,  cum_confirmed, cum_deaths, cum_recovered, report_date) %>% 
   group_by(province_state, country_region) %>% 
   mutate(
     inc_confirmed = cum_confirmed - lag(cum_confirmed, default = 0),
     inc_deaths = cum_deaths - lag(cum_deaths, default = 0),
     inc_recovered = cum_recovered - lag(cum_recovered, default = 0)
     
+  ) %>% 
+  select(
+    report_date, country_region, province_state, 
+    cum_confirmed, cum_deaths, cum_recovered, 
+    inc_confirmed, inc_deaths, inc_recovered
   )
   
 
@@ -119,7 +124,7 @@ dir.create(paste0("01_data/daily_cases/", format(end_date, "%Y-%m-%d")), recursi
 
 # write csv
 write.csv(
-  x = daily_cases_all_clean,
+  x = daily_cases_all_clean2,
   file = paste0("01_data/daily_cases/", format(end_date, "%Y-%m-%d"), "/covid19_daily_cases_cleaned.csv"),
   row.names = FALSE
 )
