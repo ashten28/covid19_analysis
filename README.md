@@ -7,39 +7,27 @@ Credit to Johns Hopkins CSSE for compiling and reporting COVID-19 data on a dail
 
 Each data file in here reports the figures as a cumulative amount. Hence, to obtain incremental figures, all the historical files must be compiled. 
 
-However, data files have inconsistent format from day to day. Codes in here aim to clean and compile the daily data into a tidy data. Please find the tidy data (here)[]. 
+However, data files have inconsistent format from day to day. Codes in here aim to clean and compile the daily data into a tidy data. Please find the tidy data (here)[01_data/covid19_daily_cases_cleaned.csv]. 
 
 In R, use the below code to read the clean tidy data:
 
-`data_url <- 
-    paste0(
-      "https://github.com/ashten28/covid19_analysis/blob/master/01_data/",
-      format(lubridate::today(tz = "UTC")-1, "%Y-%m-%d"),
-      "covid19_daily_cases_cleaned.csv"
-      )
-      
-data <- read.csv(RCurl::URL(data_url))
-
-      `
-
-``
+```
+covid19_data <- 
+  read.csv(text = RCurl::getURL("https://raw.githubusercontent.com/ashten28/covid19_analysis/master/01_data/covid19_daily_cases_cleaned.csv"))
+  
+```
 
 The data consist of these main columns:
 
-1. country_region
-2. province_state
-4. lat
-5. long
-6. cum_confirmed
-7. cum_deaths
-8. cum_recovered
-9. inc_confirmed
-10. inc_deaths
-11. inc_recovered
-12. last_update
-13. report_date
-14. combined_key
-15. fips
-16. admin2
-17. active
+1. report_date
+2. country_region - Country
+3. province_state - Province (earlier dates may not have breakdown)
+4. cum_confirmed  - Cumulative confirmed cases
+5. cum_deaths     - Cumulative deaths cases
+6. cum_recovered  - Cumulative recovered cases
+7. inc_confirmed  - Incremental confirmed cases (calculated field)
+8. inc_deaths     - Incremental death cases     (calculated field)
+9. inc_recovered  - Incremental recovered cases (calculated field)
+10. lat          - Lattitude
+11. long         - Longitude
 

@@ -68,6 +68,10 @@ daily_cases_all_clean <-
   replace_na(list(cum_confirmed = 0, cum_deaths = 0, cum_recovered = 0)) %>% 
   mutate_at(.vars = c("province_state", "country_region"), .funs = trimws) %>% 
   mutate(
+    country_region = gsub(",", "", country_region), # remove comma
+    province_state = gsub(",", "", province_state)  # remove comma
+  ) %>% 
+  mutate(
     country_region = case_when(
       country_region == "Bahamas, The"       ~ "Bahamas", 
       country_region == "The Bahamas"        ~ "Bahamas", 
@@ -115,17 +119,18 @@ daily_cases_all_clean2 <-
   select(
     report_date, country_region, province_state, 
     cum_confirmed, cum_deaths, cum_recovered, 
-    inc_confirmed, inc_deaths, inc_recovered
+    inc_confirmed, inc_deaths, inc_recovered, 
+    lat, long
   )
   
 
 # dir create for new date
-dir.create(paste0("01_data/daily_cases/", format(end_date, "%Y-%m-%d")), recursive = T)
+# dir.create(paste0("01_data/daily_cases/", format(end_date, "%Y-%m-%d")), recursive = T)
 
 # write csv
 write.csv(
   x = daily_cases_all_clean2,
-  file = paste0("01_data/daily_cases/", format(end_date, "%Y-%m-%d"), "/covid19_daily_cases_cleaned.csv"),
+  file = paste0("01_data/covid19_daily_cases_cleaned.csv"),
   row.names = FALSE
 )
 
