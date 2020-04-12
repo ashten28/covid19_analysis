@@ -78,6 +78,7 @@ daily_cases_all_clean <-
       country_region == "The Gambia"         ~ "Gambia", 
       country_region == "Gambia, The"        ~ "Gambia", 
       country_region == "Hong Kong SAR, The" ~ "Hong Kong", 
+      country_region == "Hong Kong SAR" ~ "Hong Kong", 
       country_region == "Iran (Islamic Republic of)" ~ "Iran", 
       country_region == "Korea, South" ~ "South Korea", 
       country_region == "Republic of Korea" ~ "South Korea", 
