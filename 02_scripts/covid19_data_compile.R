@@ -21,6 +21,7 @@ for (pkg in rpkgs){
 
 # last available data file in repo
 end_date <- today(tz = "UTC") -1
+# end_date <- today(tz = "UTC") 
 
 # create a vector of dates
 date_vector <-
